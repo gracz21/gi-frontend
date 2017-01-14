@@ -3,6 +3,7 @@ package pl.poznan.put.fc.gi.frontend.utils;
 import com.kennycason.kumo.CollisionMode;
 import com.kennycason.kumo.WordCloud;
 import com.kennycason.kumo.WordFrequency;
+import com.kennycason.kumo.font.KumoFont;
 import com.kennycason.kumo.font.scale.LinearFontScalar;
 import com.kennycason.kumo.nlp.FrequencyAnalyzer;
 import com.kennycason.kumo.palette.ColorPalette;
@@ -39,7 +40,15 @@ public class WordsCloudGeneratorUtil {
         WordCloud wordCloud = new WordCloud(dimension, CollisionMode.PIXEL_PERFECT);
         wordCloud.setPadding(10);
         wordCloud.setWordStartStrategy(new CenterWordStart());
-        wordCloud.setColorPalette(new ColorPalette(new Color(0x4055F1), new Color(0x408DF1), new Color(0x40AAF1), new Color(0x40C5F1), new Color(0x40D3F1), new Color(0xFFFFFF)));
+        wordCloud.setBackgroundColor(new Color(0xf4f4f4));
+        wordCloud.setColorPalette(new ColorPalette(
+                new Color(0xFA7E05),
+                new Color(0xFA8F27),
+                new Color(0xFAA149),
+                new Color(0xFAB26B),
+                new Color(0xFAC48E)
+        ));
+        wordCloud.setKumoFont(new KumoFont(ClassLoader.class.getResourceAsStream("/showcase/Roboto-Regular.ttf")));
         wordCloud.setFontScalar(new LinearFontScalar(10, 100 + (15 - wordsCount)*5));
         wordCloud.build(wordFrequencies.subList(0, wordsCount));
         return SwingFXUtils.toFXImage(wordCloud.getBufferedImage(), null);
