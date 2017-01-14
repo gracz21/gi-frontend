@@ -22,11 +22,10 @@ public abstract class WordsCloudGeneratorUtil {
         final FrequencyAnalyzer frequencyAnalyzer = new FrequencyAnalyzer();
         frequencyAnalyzer.setWordFrequenciesToReturn(wordsCount);
 
-        final List<WordFrequency> wordFrequencies = frequencyAnalyzer.load(Arrays.asList("Buenos Aires", "Córdoba", "La Plata"));
-        final Dimension dimension = new Dimension(500, 312);
+        final List<WordFrequency> wordFrequencies = frequencyAnalyzer.load(Arrays.asList("Buenos Aires", "Buenos Aires", "Córdoba", "La Plata"));
+        final Dimension dimension = new Dimension(700, 700);
         final WordCloud wordCloud = new WordCloud(dimension, CollisionMode.PIXEL_PERFECT);
         wordCloud.setPadding(2);
-        wordCloud.setBackground(new RectangleBackground(dimension));
         wordCloud.setColorPalette(new ColorPalette(new Color(0x4055F1), new Color(0x408DF1), new Color(0x40AAF1), new Color(0x40C5F1), new Color(0x40D3F1), new Color(0xFFFFFF)));
         wordCloud.setFontScalar(new LinearFontScalar(10, 40));
         wordCloud.build(wordFrequencies);
