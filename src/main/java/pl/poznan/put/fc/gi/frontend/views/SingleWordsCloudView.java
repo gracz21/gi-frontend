@@ -1,10 +1,8 @@
 package pl.poznan.put.fc.gi.frontend.views;
 
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.SplitPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import pl.poznan.put.fc.gi.frontend.controllers.SingleWordsCloudController;
 
 import java.io.IOException;
