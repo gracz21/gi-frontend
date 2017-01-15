@@ -49,8 +49,12 @@ public class WordsCloudGeneratorUtil {
                 new Color(0xFAC48E)
         ));
         wordCloud.setKumoFont(new KumoFont(ClassLoader.class.getResourceAsStream("/showcase/Roboto-Regular.ttf")));
-        wordCloud.setFontScalar(new LinearFontScalar(10, 100 + (15 - wordsCount)*5));
+        wordCloud.setFontScalar(new LinearFontScalar(10, 100 + (15 - wordsCount) * 5));
         wordCloud.build(wordFrequencies.subList(0, wordsCount));
         return SwingFXUtils.toFXImage(wordCloud.getBufferedImage(), null);
+    }
+
+    public List<WordFrequency> getWordFrequencies() {
+        return wordFrequencies;
     }
 }

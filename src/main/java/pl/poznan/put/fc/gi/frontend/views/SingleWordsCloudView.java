@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import pl.poznan.put.fc.gi.frontend.controllers.SingleWordsCloudController;
+import pl.poznan.put.fc.gi.frontend.utils.WordsCloudGeneratorUtil;
 
 import java.io.IOException;
 
@@ -16,7 +17,9 @@ public class SingleWordsCloudView {
     public SingleWordsCloudView(Image wordsCloudImage) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/SingleWordsCloudLayout.fxml"));
         layout = loader.load();
-        ((SingleWordsCloudController)loader.getController()).setWordsCloudImage(wordsCloudImage);
+        SingleWordsCloudController controller = loader.getController();
+        controller.setWordsCloudImage(wordsCloudImage);
+        controller.setWordFrequencyList(WordsCloudGeneratorUtil.getInstance().getWordFrequencies().subList(0, 15));
     }
 
     public HBox getLayout() {
