@@ -9,8 +9,13 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
 <?import java.util.ArrayList?>
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.poznan.put.fc.gi.frontend.controllers.RootController">
@@ -97,7 +102,42 @@
     </Tab>
       <Tab text="Podobieństwo artykułów">
         <content>
-          <AnchorPane fx:id="graphAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            <HBox fx:id="pane" alignment="CENTER">
+               <children>
+                  <VBox alignment="BOTTOM_CENTER">
+                     <children>
+                        <Label text="Skala">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font size="21.0" />
+                           </font>
+                        </Label>
+                        <AnchorPane>
+                           <children>
+                              <Rectangle arcWidth="5.0" height="200.0" smooth="false" stroke="TRANSPARENT" strokeType="INSIDE" width="101.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="0.0">
+                                 <fill>
+                                    <LinearGradient cycleMethod="REFLECT" endX="0.49029126213592233" endY="1.0" startX="0.49514563106796117">
+                                       <stops>
+                                          <Stop color="#0e812e" />
+                                          <Stop color="#85e5a0" offset="1.0" />
+                                       </stops>
+                                    </LinearGradient>
+                                 </fill>
+                              </Rectangle>
+                              <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="101.0" text="Bardzo&#10;podobne" textAlignment="CENTER" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                              </Label>
+                              <Label layoutX="118.0" layoutY="176.0" text="Mało&#10;podobne" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="10.0" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
         </content>
       </Tab>
   </tabs>
