@@ -1,6 +1,8 @@
 package pl.poznan.put.fc.gi.frontend.utils;
 
 import com.kennycason.kumo.WordFrequency;
+import org.apache.commons.lang.WordUtils;
+import pl.poznan.put.fc.gi.frontend.models.Article;
 
 import java.net.URISyntaxException;
 import java.nio.file.Paths;
@@ -26,10 +28,11 @@ public abstract class DatabaseHandlerUtil {
             "WHERE date = ? " +
             "GROUP BY term " +
             "ORDER BY val DESC " +
-            "LIMIT ?";
+            "LIMIT 15";
     private static final String yearsWithArticlesQuery = "SELECT DISTINCT date FROM articles ORDER BY date";
-    private static final String allArticlesQuery = "SELECT COUNT(*) FROM articles ORDER BY date";
-    private static final String yearArticlesQuery = "SELECT COUNT(*) FROM articles WHERE date = ? ORDER BY date";
+    private static final String allArticlesQuery = "SELECT id, title, authors, date FROM articles ORDER BY date";
+    private static final String yearArticlesQuery = "SELECT id, title, authors, date " +
+            "FROM articles WHERE date = ? ORDER BY date";
 
     public static List<WordFrequency> getSummaryWordsFrequencyList() {
         List<WordFrequency> wordFrequencies = null;
@@ -45,14 +48,13 @@ public abstract class DatabaseHandlerUtil {
         return wordFrequencies;
     }
 
-    public static List<WordFrequency> getWordsFrequencyListFromYear(int numOfWords, int year) {
+    public static List<WordFrequency> getWordsFrequencyListFromYear(int year) {
         List<WordFrequency> wordFrequencies = null;
 
         try {
             Connection connection = setupConnection();
             PreparedStatement statement = connection.prepareStatement(wordsYearQuery);
             statement.setInt(1, year);
-            statement.setInt(2, numOfWords);
             wordFrequencies = executeWordsFrequencyStatement(statement);
             connection.close();
         } catch (ClassNotFoundException | SQLException | URISyntaxException e) {
@@ -80,35 +82,35 @@ public abstract class DatabaseHandlerUtil {
         return years;
     }
 
-    public static int getAllArticlesCount() {
-        int result = 0;
+    public static List<Article> getAllArticles() {
+        List<Article> articles = null;
 
         try {
             Connection connection = setupConnection();
             PreparedStatement statement = connection.prepareStatement(allArticlesQuery);
-            result = executeArticlesCountStatement(statement);
+            articles = executeArticlesStatement(statement);
             connection.close();
         } catch (ClassNotFoundException | SQLException | URISyntaxException e) {
             e.printStackTrace();
         }
 
-        return result;
+        return articles;
     }
 
-    public static int getYearArticlesCount(int year) {
-        int result = 0;
+    public static List<Article> getYearArticles(int year) {
+        List<Article> articles = null;
 
         try {
             Connection connection = setupConnection();
             PreparedStatement statement = connection.prepareStatement(yearArticlesQuery);
             statement.setInt(1, year);
-            result = executeArticlesCountStatement(statement);
+            articles = executeArticlesStatement(statement);
             connection.close();
         } catch (ClassNotFoundException | SQLException | URISyntaxException e) {
             e.printStackTrace();
         }
 
-        return result;
+        return articles;
     }
 
     private static Connection setupConnection() throws ClassNotFoundException, SQLException, URISyntaxException {
@@ -128,8 +130,17 @@ public abstract class DatabaseHandlerUtil {
         return result;
     }
 
-    private static int executeArticlesCountStatement(PreparedStatement statement) throws SQLException {
+    private static List<Article> executeArticlesStatement(PreparedStatement statement) throws SQLException {
+        List<Article> articles = new ArrayList<>();
         ResultSet rs = statement.executeQuery();
-        return rs.getInt(1);
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            String title = rs.getString("title");
+            title = title.substring(0, 1).toUpperCase() + title.substring(1);
+            int date = rs.getInt("date");
+            String authors = WordUtils.capitalize(rs.getString("authors"));
+            articles.add(new Article(id, title, date, authors));
+        }
+        return articles;
     }
 }

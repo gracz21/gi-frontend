@@ -13,6 +13,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
+import pl.poznan.put.fc.gi.frontend.models.Article;
 import pl.poznan.put.fc.gi.frontend.utils.DatabaseHandlerUtil;
 import pl.poznan.put.fc.gi.frontend.views.SingleWordsCloudView;
 
@@ -33,10 +34,12 @@ public class RootController {
     private HBox pane;
 
     private List<Integer> yearsWithArticles;
+    private List<Article> articles;
 
     @FXML
     private void initialize() throws IOException {
         yearsWithArticles = DatabaseHandlerUtil.getYearsWithArticles();
+        articles = DatabaseHandlerUtil.getAllArticles();
 
         setupSummaryTab();
         setupYearsSummaryTab();
@@ -45,7 +48,7 @@ public class RootController {
 
     private void setupSummaryTab() throws IOException {
         List<WordFrequency> wordFrequencies = DatabaseHandlerUtil.getSummaryWordsFrequencyList();
-        int articlesCount = DatabaseHandlerUtil.getAllArticlesCount();
+        int articlesCount = articles.size();
         String label = articlesCount + " artykułów z lat " + yearsWithArticles.get(0)
                 + "-" + yearsWithArticles.get(yearsWithArticles.size() - 1);
         SingleWordsCloudView singleWordsCloudView = new SingleWordsCloudView("summary.png", wordFrequencies, label);
@@ -80,8 +83,8 @@ public class RootController {
     }
 
     private void showYearDetails(int year) throws IOException {
-        List<WordFrequency> wordFrequencies = DatabaseHandlerUtil.getWordsFrequencyListFromYear(15, year);
-        int articlesCount = DatabaseHandlerUtil.getYearArticlesCount(year);
+        List<WordFrequency> wordFrequencies = DatabaseHandlerUtil.getWordsFrequencyListFromYear(year);
+        int articlesCount = DatabaseHandlerUtil.getYearArticles(year).size();
         String label = articlesCount + " artykuł(-y) z roku " + year;
         Stage stage = new Stage();
         stage.setMaximized(true);
