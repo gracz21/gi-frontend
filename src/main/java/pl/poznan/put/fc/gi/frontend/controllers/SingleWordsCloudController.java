@@ -41,6 +41,10 @@ public class SingleWordsCloudController {
         countTableColumn.setCellValueFactory(param -> new SimpleObjectProperty<>(param.getValue().getFrequency()));
     }
 
+    public void setNumOfArticlesLabel(String label) {
+        numOfArticlesLabel.setText(label);
+    }
+
     public void setWordsCloudImage(Image wordsCloudImage) {
         wordsCloudImageView.setImage(wordsCloudImage);
     }

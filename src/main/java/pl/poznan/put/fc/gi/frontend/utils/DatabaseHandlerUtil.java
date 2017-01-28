@@ -28,6 +28,8 @@ public abstract class DatabaseHandlerUtil {
             "ORDER BY val DESC " +
             "LIMIT ?";
     private static final String yearsWithArticlesQuery = "SELECT DISTINCT date FROM articles ORDER BY date";
+    private static final String allArticlesQuery = "SELECT COUNT(*) FROM articles ORDER BY date";
+    private static final String yearArticlesQuery = "SELECT COUNT(*) FROM articles WHERE date = ? ORDER BY date";
 
     public static List<WordFrequency> getSummaryWordsFrequencyList() {
         List<WordFrequency> wordFrequencies = null;
@@ -35,7 +37,7 @@ public abstract class DatabaseHandlerUtil {
         try {
             Connection connection = setupConnection();
             PreparedStatement statement = connection.prepareStatement(wordsSummaryQuery);
-            wordFrequencies = executeStatement(statement);
+            wordFrequencies = executeWordsFrequencyStatement(statement);
             connection.close();
         } catch (ClassNotFoundException | SQLException | URISyntaxException e) {
             e.printStackTrace();
@@ -51,7 +53,7 @@ public abstract class DatabaseHandlerUtil {
             PreparedStatement statement = connection.prepareStatement(wordsYearQuery);
             statement.setInt(1, year);
             statement.setInt(2, numOfWords);
-            wordFrequencies = executeStatement(statement);
+            wordFrequencies = executeWordsFrequencyStatement(statement);
             connection.close();
         } catch (ClassNotFoundException | SQLException | URISyntaxException e) {
             e.printStackTrace();
@@ -78,6 +80,37 @@ public abstract class DatabaseHandlerUtil {
         return years;
     }
 
+    public static int getAllArticlesCount() {
+        int result = 0;
+
+        try {
+            Connection connection = setupConnection();
+            PreparedStatement statement = connection.prepareStatement(allArticlesQuery);
+            result = executeArticlesCountStatement(statement);
+            connection.close();
+        } catch (ClassNotFoundException | SQLException | URISyntaxException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    public static int getYearArticlesCount(int year) {
+        int result = 0;
+
+        try {
+            Connection connection = setupConnection();
+            PreparedStatement statement = connection.prepareStatement(yearArticlesQuery);
+            statement.setInt(1, year);
+            result = executeArticlesCountStatement(statement);
+            connection.close();
+        } catch (ClassNotFoundException | SQLException | URISyntaxException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
     private static Connection setupConnection() throws ClassNotFoundException, SQLException, URISyntaxException {
         String dbLocation =
                 Paths.get(DatabaseHandlerUtil.class.getResource("/data/database.sqlite").toURI()).toString();
@@ -85,7 +118,7 @@ public abstract class DatabaseHandlerUtil {
         return DriverManager.getConnection("jdbc:sqlite:" + dbLocation);
     }
 
-    private static List<WordFrequency> executeStatement(PreparedStatement statement) throws SQLException {
+    private static List<WordFrequency> executeWordsFrequencyStatement(PreparedStatement statement) throws SQLException {
         ResultSet rs = statement.executeQuery();
         List<WordFrequency> result = new ArrayList<>();
         while (rs.next()) {
@@ -93,5 +126,10 @@ public abstract class DatabaseHandlerUtil {
         }
 
         return result;
+    }
+
+    private static int executeArticlesCountStatement(PreparedStatement statement) throws SQLException {
+        ResultSet rs = statement.executeQuery();
+        return rs.getInt(1);
     }
 }

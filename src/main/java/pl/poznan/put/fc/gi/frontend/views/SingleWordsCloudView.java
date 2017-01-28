@@ -15,13 +15,14 @@ import java.util.List;
 public class SingleWordsCloudView {
     private HBox layout;
 
-    public SingleWordsCloudView(String imageName, List<WordFrequency> wordFrequencies) throws IOException {
+    public SingleWordsCloudView(String imageName, List<WordFrequency> wordFrequencies, String articlesLabel) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/SingleWordsCloudLayout.fxml"));
         layout = loader.load();
         Image wordsCloudImage = new Image(getClass().getResourceAsStream("/wordsClouds/" + imageName));
         SingleWordsCloudController controller = loader.getController();
         controller.setWordsCloudImage(wordsCloudImage);
         controller.setWordFrequencyList(wordFrequencies);
+        controller.setNumOfArticlesLabel(articlesLabel);
     }
 
     public HBox getLayout() {

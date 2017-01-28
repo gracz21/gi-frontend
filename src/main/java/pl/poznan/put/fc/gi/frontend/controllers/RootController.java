@@ -45,7 +45,10 @@ public class RootController {
 
     private void setupSummaryTab() throws IOException {
         List<WordFrequency> wordFrequencies = DatabaseHandlerUtil.getSummaryWordsFrequencyList();
-        SingleWordsCloudView singleWordsCloudView = new SingleWordsCloudView("summary.png", wordFrequencies);
+        int articlesCount = DatabaseHandlerUtil.getAllArticlesCount();
+        String label = articlesCount + " artykułów z lat " + yearsWithArticles.get(0)
+                + "-" + yearsWithArticles.get(yearsWithArticles.size() - 1);
+        SingleWordsCloudView singleWordsCloudView = new SingleWordsCloudView("summary.png", wordFrequencies, label);
         BorderPane borderPane = (BorderPane) summaryTab.getContent();
         HBox layout = singleWordsCloudView.getLayout();
         borderPane.setCenter(layout);
@@ -78,10 +81,12 @@ public class RootController {
 
     private void showYearDetails(int year) throws IOException {
         List<WordFrequency> wordFrequencies = DatabaseHandlerUtil.getWordsFrequencyListFromYear(15, year);
+        int articlesCount = DatabaseHandlerUtil.getYearArticlesCount(year);
+        String label = articlesCount + " artykuł(-y) z roku " + year;
         Stage stage = new Stage();
         stage.setMaximized(true);
         stage.setTitle("Podsumowanie roku");
-        SingleWordsCloudView singleWordsCloudView = new SingleWordsCloudView(year + ".png", wordFrequencies);
+        SingleWordsCloudView singleWordsCloudView = new SingleWordsCloudView(year + ".png", wordFrequencies, label);
         stage.setScene(new Scene(singleWordsCloudView.getLayout()));
         stage.show();
     }
