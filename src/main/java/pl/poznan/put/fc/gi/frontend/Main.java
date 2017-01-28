@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/RootLayout.fxml"));
         primaryStage.setTitle("Badacz badacza 1.0");
         primaryStage.setMaximized(true);

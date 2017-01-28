@@ -29,7 +29,7 @@ public class WordsCloudGeneratorUtil {
 
     private static void generateYearsClouds() throws IOException {
         List<Integer> years = DatabaseHandlerUtil.getYearsWithArticles();
-        for(int year: years) {
+        for (int year : years) {
             List<WordFrequency> wordFrequencies = DatabaseHandlerUtil.getWordsFrequencyListFromYear(15, year);
             generateWordsCloudImage(wordFrequencies.subList(0, 5), year + "_mini.png");
             generateWordsCloudImage(wordFrequencies, year + ".png");

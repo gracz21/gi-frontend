@@ -18,7 +18,6 @@ import pl.poznan.put.fc.gi.frontend.views.SingleWordsCloudView;
 
 import javax.swing.*;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +46,7 @@ public class RootController {
     private void setupSummaryTab() throws IOException {
         List<WordFrequency> wordFrequencies = DatabaseHandlerUtil.getSummaryWordsFrequencyList();
         SingleWordsCloudView singleWordsCloudView = new SingleWordsCloudView("summary.png", wordFrequencies);
-        BorderPane borderPane = (BorderPane)summaryTab.getContent();
+        BorderPane borderPane = (BorderPane) summaryTab.getContent();
         HBox layout = singleWordsCloudView.getLayout();
         borderPane.setCenter(layout);
         layout.prefWidthProperty().bind(borderPane.widthProperty());
@@ -55,11 +54,11 @@ public class RootController {
     }
 
     private void setupYearsSummaryTab() {
-        for(ImageView imageView: wordsCloudImageViews) {
+        for (ImageView imageView : wordsCloudImageViews) {
             int index = wordsCloudImageViews.indexOf(imageView);
-            InputStream image = getClass().getResourceAsStream("/wordsClouds/" +
-                    yearsWithArticles.get(index) + "_mini.png");
-            imageView.setImage(new Image(image));
+            Image image = new Image(getClass().getResourceAsStream("/wordsClouds/" +
+                    yearsWithArticles.get(index) + "_mini.png"));
+            imageView.setImage(image);
             imageView.setOnMouseClicked(event -> {
                 try {
                     showYearDetails(yearsWithArticles.get(index));
