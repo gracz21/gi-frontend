@@ -20,7 +20,7 @@ public abstract class DatabaseHandlerUtil {
             "JOIN weights ON weights.type = terms.type " +
             "GROUP BY term " +
             "ORDER BY val DESC " +
-            "LIMIT 15";
+            "LIMIT 20";
     private static final String wordsYearQuery = "SELECT term, SUM(count*weight) AS val " +
             "FROM articles " +
             "JOIN terms ON articles.id = terms.article " +
@@ -28,7 +28,7 @@ public abstract class DatabaseHandlerUtil {
             "WHERE date = ? " +
             "GROUP BY term " +
             "ORDER BY val DESC " +
-            "LIMIT 15";
+            "LIMIT 20";
     private static final String yearsWithArticlesQuery = "SELECT DISTINCT date FROM articles ORDER BY date";
     private static final String allArticlesQuery = "SELECT id, title, authors, date FROM articles ORDER BY date";
     private static final String yearArticlesQuery = "SELECT id, title, authors, date " +

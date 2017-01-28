@@ -31,7 +31,7 @@ public class WordsCloudGeneratorUtil {
         List<Integer> years = DatabaseHandlerUtil.getYearsWithArticles();
         for (int year : years) {
             List<WordFrequency> wordFrequencies = DatabaseHandlerUtil.getWordsFrequencyListFromYear(year);
-            generateWordsCloudImage(wordFrequencies.subList(0, 5), year + "_mini.png");
+            generateWordsCloudImage(wordFrequencies.subList(0, 7), year + "_mini.png");
             generateWordsCloudImage(wordFrequencies, year + ".png");
         }
     }
@@ -50,7 +50,7 @@ public class WordsCloudGeneratorUtil {
                 new Color(0xFAC48E)
         ));
         wordCloud.setKumoFont(new KumoFont(ClassLoader.class.getResourceAsStream("/font/Roboto-Regular.ttf")));
-        wordCloud.setFontScalar(new LinearFontScalar(10, 100 + (15 - wordFrequencies.size()) * 5));
+        wordCloud.setFontScalar(new LinearFontScalar(10, 100));
         wordCloud.build(wordFrequencies.subList(0, wordFrequencies.size()));
         wordCloud.writeToFile("output/" + filename);
     }

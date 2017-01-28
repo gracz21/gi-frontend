@@ -35,71 +35,72 @@
                   <VBox alignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
                         <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="48.0" text="2001" textAlignment="CENTER" VBox.vgrow="ALWAYS" />
-                        <ImageView fx:id="wordsCloudImageView1" fitHeight="187.5" fitWidth="187.5" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS" />
+                        <ImageView fx:id="wordsCloudImageView1" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
                         <Label text="2002" />
-                        <ImageView fx:id="wordsCloudImageView2" fitHeight="187.5" fitWidth="187.5" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS" />
+                        <ImageView fx:id="wordsCloudImageView2" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
                         <Label text="2004" />
-                        <ImageView fx:id="wordsCloudImageView3" fitHeight="187.5" fitWidth="187.5" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS" />
+                        <ImageView fx:id="wordsCloudImageView3" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                     <children>
+                        <Label text="2005" />
+                        <ImageView fx:id="wordsCloudImageView4" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
-                        <Label text="2005" />
-                        <ImageView fx:id="wordsCloudImageView4" fitHeight="187.5" fitWidth="187.5" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS" />
+                        <Label text="2006" />
+                        <ImageView fx:id="wordsCloudImageView5" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
-                        <Label text="2006" />
-                        <ImageView fx:id="wordsCloudImageView5" fitHeight="187.5" fitWidth="187.5" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS" />
+                        <Label text="2007" />
+                        <ImageView fx:id="wordsCloudImageView6" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
-                        <Label text="2007" />
-                        <ImageView fx:id="wordsCloudImageView6" fitHeight="187.5" fitWidth="187.5" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS" />
+                        <Label text="2009" />
+                        <ImageView fx:id="wordsCloudImageView7" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                     <children>
+                        <Label text="2011" />
+                        <ImageView fx:id="wordsCloudImageView8" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
-                        <Label text="2009" />
-                        <ImageView fx:id="wordsCloudImageView7" fitHeight="187.5" fitWidth="187.5" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
-                     <children>
-                        <Label text="2011" />
-                        <ImageView fx:id="wordsCloudImageView8" fitHeight="187.5" fitWidth="187.5" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
-                     <children>
                         <Label text="2013" />
-                        <ImageView fx:id="wordsCloudImageView9" fitHeight="187.5" fitWidth="187.5" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS" />
+                        <ImageView fx:id="wordsCloudImageView9" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS" />
                      </children>
                   </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
                         <Label text="2014" />
-                        <ImageView fx:id="wordsCloudImageView10" fitHeight="187.5" fitWidth="187.5" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="wordsCloudImageView10" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
                         <Label text="2016" />
-                        <ImageView fx:id="wordsCloudImageView11" fitHeight="187.5" fitWidth="187.5" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="wordsCloudImageView11" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </VBox>
                </children>
                <columnConstraints>
+                  <ColumnConstraints />
                   <ColumnConstraints />
                   <ColumnConstraints />
                   <ColumnConstraints />
