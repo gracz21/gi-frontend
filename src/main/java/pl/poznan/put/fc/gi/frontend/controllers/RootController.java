@@ -14,11 +14,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
 import pl.poznan.put.fc.gi.frontend.utils.DatabaseHandlerUtil;
-import pl.poznan.put.fc.gi.frontend.utils.WordsCloudGeneratorUtil;
 import pl.poznan.put.fc.gi.frontend.views.SingleWordsCloudView;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,14 +33,10 @@ public class RootController {
     @FXML
     private HBox pane;
 
-    private Image summaryWordsCloudImage;
-    private Image miniWordsCloudImage;
     private List<Integer> yearsWithArticles;
 
     @FXML
     private void initialize() throws IOException {
-        summaryWordsCloudImage = WordsCloudGeneratorUtil.getInstance().generateWordsCloudImage(15);
-        miniWordsCloudImage = WordsCloudGeneratorUtil.getInstance().generateWordsCloudImage(5);
         yearsWithArticles = DatabaseHandlerUtil.getYearsWithArticles();
 
         setupSummaryTab();
@@ -50,7 +46,7 @@ public class RootController {
 
     private void setupSummaryTab() throws IOException {
         List<WordFrequency> wordFrequencies = DatabaseHandlerUtil.getSummaryWordsFrequencyList();
-        SingleWordsCloudView singleWordsCloudView = new SingleWordsCloudView(summaryWordsCloudImage, wordFrequencies);
+        SingleWordsCloudView singleWordsCloudView = new SingleWordsCloudView("summary.png", wordFrequencies);
         BorderPane borderPane = (BorderPane)summaryTab.getContent();
         HBox layout = singleWordsCloudView.getLayout();
         borderPane.setCenter(layout);
@@ -60,10 +56,12 @@ public class RootController {
 
     private void setupYearsSummaryTab() {
         for(ImageView imageView: wordsCloudImageViews) {
-            imageView.setImage(miniWordsCloudImage);
+            int index = wordsCloudImageViews.indexOf(imageView);
+            InputStream image = getClass().getResourceAsStream("/wordsClouds/" +
+                    yearsWithArticles.get(index) + "_mini.png");
+            imageView.setImage(new Image(image));
             imageView.setOnMouseClicked(event -> {
                 try {
-                    int index = wordsCloudImageViews.indexOf(imageView);
                     showYearDetails(yearsWithArticles.get(index));
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -84,7 +82,7 @@ public class RootController {
         Stage stage = new Stage();
         stage.setMaximized(true);
         stage.setTitle("Podsumowanie roku");
-        SingleWordsCloudView singleWordsCloudView = new SingleWordsCloudView(summaryWordsCloudImage, wordFrequencies);
+        SingleWordsCloudView singleWordsCloudView = new SingleWordsCloudView(year + ".png", wordFrequencies);
         stage.setScene(new Scene(singleWordsCloudView.getLayout()));
         stage.show();
     }
