@@ -70,6 +70,7 @@ public abstract class DatabaseHandlerUtil {
             while (rs.next()) {
                 years.add(rs.getInt("date"));
             }
+            connection.close();
         } catch (ClassNotFoundException | URISyntaxException | SQLException e) {
             e.printStackTrace();
         }
