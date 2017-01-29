@@ -5,11 +5,11 @@ import com.sun.javafx.collections.ObservableListWrapper;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
+import pl.poznan.put.fc.gi.frontend.models.Article;
 
 import java.util.List;
 
@@ -23,6 +23,12 @@ public class SingleWordsCloudController {
     @FXML
     private Label numOfArticlesLabel;
     @FXML
+    private TableView articlesTableView;
+    @FXML
+    private TableColumn<Article, String> titleTableColumn;
+    @FXML
+    private TableColumn<Article, String> authorsTableColumn;
+    @FXML
     private TableView wordsStatisticsTableView;
     @FXML
     private TableColumn<WordFrequency, String> wordTableColumn;
@@ -33,6 +39,18 @@ public class SingleWordsCloudController {
 
     @FXML
     private void initialize() {
+        titleTableColumn.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getTitle()));
+        titleTableColumn.setCellFactory(param -> {
+            TableCell<Article, String> cell = new TableCell<>();
+            Text text = new Text();
+            cell.setGraphic(text);
+            cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
+            text.wrappingWidthProperty().bind(titleTableColumn.widthProperty());
+            text.textProperty().bind(cell.itemProperty());
+            return cell ;
+        });
+        authorsTableColumn.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getAuthors()));
+
         wordTableColumn.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getWord()));
         countTableColumn.setStyle( "-fx-alignment: CENTER-RIGHT;");
         countTableColumn.setCellValueFactory(param -> new SimpleObjectProperty<>(param.getValue().getFrequency()));
@@ -49,5 +67,9 @@ public class SingleWordsCloudController {
     public void setWordFrequencyList(List<WordFrequency> wordFrequencyList) {
         this.wordFrequencyList = wordFrequencyList;
         wordsStatisticsTableView.setItems(new ObservableListWrapper<>(wordFrequencyList));
+    }
+
+    public void setArticlesList(List<Article> articlesList) {
+        articlesTableView.setItems(new ObservableListWrapper<>(articlesList));
     }
 }
