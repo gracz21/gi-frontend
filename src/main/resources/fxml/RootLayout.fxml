@@ -17,7 +17,6 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<?import java.util.ArrayList?>
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.poznan.put.fc.gi.frontend.controllers.RootController">
   <tabs>
     <Tab fx:id="summaryTab" text="Podsumowanie">
@@ -134,8 +133,9 @@
                                  <fill>
                                     <LinearGradient cycleMethod="REFLECT" endX="0.49029126213592233" endY="1.0" startX="0.49514563106796117">
                                        <stops>
-                                          <Stop color="#0e812e" />
-                                          <Stop color="#85e5a0" offset="1.0" />
+                                          <Stop color="BLACK" />
+                                          <Stop color="#e11614" offset="0.007246376811594203" />
+                                          <Stop color="#0e812e" offset="1.0" />
                                        </stops>
                                     </LinearGradient>
                                  </fill>

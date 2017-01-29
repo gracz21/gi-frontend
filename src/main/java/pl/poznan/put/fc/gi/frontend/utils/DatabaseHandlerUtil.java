@@ -8,7 +8,9 @@ import java.net.URISyntaxException;
 import java.nio.file.Paths;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Kamil Walkowiak
@@ -33,6 +35,9 @@ public abstract class DatabaseHandlerUtil {
     private static final String allArticlesQuery = "SELECT id, title, authors, date FROM articles ORDER BY date";
     private static final String yearArticlesQuery = "SELECT id, title, authors, date " +
             "FROM articles WHERE date = ? ORDER BY date";
+    private static final String similarityQuery = "SELECT article1, article2, (similarity - 0.4)*10 as similarity " +
+            "FROM similarities WHERE similarity > 0.4 " +
+            "ORDER BY article1, article2";
 
     public static List<WordFrequency> getSummaryWordsFrequencyList() {
         List<WordFrequency> wordFrequencies = null;
@@ -111,6 +116,36 @@ public abstract class DatabaseHandlerUtil {
         }
 
         return articles;
+    }
+
+    public static Map<Object, Map<Object, Integer>> getSimilaritiesMap(List<Object> vertices) {
+        Map<Object, Map<Object, Integer>> similarityMap = null;
+
+        try {
+            Connection connection = setupConnection();
+            PreparedStatement statement = connection.prepareStatement(similarityQuery);
+            ResultSet rs = statement.executeQuery();
+            similarityMap = new HashMap<>();
+            int currentVertexIndex = 1;
+            Map<Object, Integer> currentVertexSimilarityMap = new HashMap<>();
+            while (rs.next()) {
+                int article1 = rs.getInt("article1");
+                int article2 = rs.getInt("article2");
+                if(currentVertexIndex != article1) {
+                    similarityMap.put(vertices.get(currentVertexIndex-1), currentVertexSimilarityMap);
+                    currentVertexIndex = article1;
+                    currentVertexSimilarityMap = new HashMap<>();
+                }
+                if(article2 > currentVertexIndex) {
+                    currentVertexSimilarityMap.put(vertices.get(article2-1), rs.getInt("similarity"));
+                }
+            }
+            connection.close();
+        } catch (ClassNotFoundException | SQLException | URISyntaxException e) {
+            e.printStackTrace();
+        }
+
+        return similarityMap;
     }
 
     private static Connection setupConnection() throws ClassNotFoundException, SQLException, URISyntaxException {
