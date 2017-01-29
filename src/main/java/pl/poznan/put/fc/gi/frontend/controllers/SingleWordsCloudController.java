@@ -25,8 +25,6 @@ public class SingleWordsCloudController {
     @FXML
     private TableView wordsStatisticsTableView;
     @FXML
-    private TableColumn<WordFrequency, Integer> rankTableColumn;
-    @FXML
     private TableColumn<WordFrequency, String> wordTableColumn;
     @FXML
     private TableColumn<WordFrequency, Integer> countTableColumn;
@@ -35,9 +33,8 @@ public class SingleWordsCloudController {
 
     @FXML
     private void initialize() {
-        rankTableColumn.setCellValueFactory(param ->
-                new SimpleObjectProperty<>(wordFrequencyList.indexOf(param.getValue()) + 1));
         wordTableColumn.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getWord()));
+        countTableColumn.setStyle( "-fx-alignment: CENTER-RIGHT;");
         countTableColumn.setCellValueFactory(param -> new SimpleObjectProperty<>(param.getValue().getFrequency()));
     }
 

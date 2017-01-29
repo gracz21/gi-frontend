@@ -32,7 +32,6 @@
             </Label>
             <TableView fx:id="wordsStatisticsTableView" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
               <columns>
-                <TableColumn fx:id="rankTableColumn" prefWidth="75.0" text="Lp." />
                 <TableColumn fx:id="wordTableColumn" prefWidth="300.0" text="Słowo" />
                   <TableColumn fx:id="countTableColumn" prefWidth="220.0" text="Predykcja" />
               </columns>
