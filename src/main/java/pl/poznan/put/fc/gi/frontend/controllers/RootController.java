@@ -23,7 +23,6 @@ import pl.poznan.put.fc.gi.frontend.utils.DatabaseHandlerUtil;
 import pl.poznan.put.fc.gi.frontend.views.SingleWordsCloudView;
 
 import javax.swing.*;
-import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
