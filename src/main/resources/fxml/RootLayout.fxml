@@ -135,8 +135,9 @@
                                     <LinearGradient cycleMethod="REFLECT" endX="0.49029126213592233" endY="1.0" startX="0.49514563106796117">
                                        <stops>
                                           <Stop color="BLACK" />
-                                          <Stop color="#e11614" offset="0.007246376811594203" />
-                                          <Stop color="#0e812e" offset="1.0" />
+                                          <Stop color="#e11614" />
+                                           <Stop color="#E9F221" offset="0.5" />
+                                          <Stop color="#0E812E" offset="1.0" />
                                        </stops>
                                     </LinearGradient>
                                  </fill>

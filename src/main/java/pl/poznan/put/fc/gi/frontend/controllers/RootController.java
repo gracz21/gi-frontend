@@ -1,6 +1,10 @@
 package pl.poznan.put.fc.gi.frontend.controllers;
 
 import com.kennycason.kumo.WordFrequency;
+import com.mxgraph.layout.hierarchical.mxHierarchicalLayout;
+import com.mxgraph.layout.mxCircleLayout;
+import com.mxgraph.layout.mxFastOrganicLayout;
+import com.mxgraph.layout.mxIGraphLayout;
 import com.mxgraph.model.mxCell;
 import com.mxgraph.model.mxICell;
 import com.mxgraph.swing.mxGraphComponent;
@@ -111,6 +115,7 @@ public class RootController {
             }
         };
         graph.setCellsLocked(true);
+        //graph.getStylesheet().getDefaultEdgeStyle().put(mxConstants.STY);
         mxConstants.DEFAULT_MARKERSIZE = 0;
         Object defaultParent = graph.getDefaultParent();
         graph.getModel().beginUpdate();
@@ -120,6 +125,12 @@ public class RootController {
         Map<Object, Map<Object, Integer>> similarityMap = DatabaseHandlerUtil.getSimilaritiesMap(vertices);
         setupEdges(similarityMap, graph, defaultParent);
 
+        // define layout
+        mxHierarchicalLayout layout = new mxHierarchicalLayout(graph);
+        layout.setOrientation(SwingConstants.WEST);
+        // layout graph
+        layout.execute(graph.getDefaultParent());
+
         graph.getModel().endUpdate();
         final mxCell[] lastSelectedCell = {null};
         mxGraphComponent graphComponent = new mxGraphComponent(graph);
@@ -127,6 +138,12 @@ public class RootController {
         graph.getSelectionModel().addListener(mxEvent.CHANGE, (o, mxEventObject) -> {
             Object[] objects = ((mxGraphSelectionModel) o).getCells();
             mxCell cell = null;
+            if (lastSelectedCell[0] != null) {
+                for (int i = 0; i < lastSelectedCell[0].getEdgeCount(); i++) {
+                    mxICell edge = lastSelectedCell[0].getEdgeAt(i);
+                    edge.setStyle(edge.getStyle() + ";opacity=30");
+                }
+            }
             if(objects.length > 0) {
                 cell = (mxCell)objects[0];
                 if (!cell.equals(lastSelectedCell[0])) {
@@ -142,12 +159,6 @@ public class RootController {
                         newStyle = newStyle.substring(0, newStyle.length() - 1);
                         edge.setStyle(newStyle);
                     }
-                }
-            }
-            if (lastSelectedCell[0] != null) {
-                for (int i = 0; i < lastSelectedCell[0].getEdgeCount(); i++) {
-                    mxICell edge = lastSelectedCell[0].getEdgeAt(i);
-                    edge.setStyle(edge.getStyle() + ";opacity=30");
                 }
             }
             lastSelectedCell[0] = cell;
@@ -196,8 +207,8 @@ public class RootController {
     }
 
     private void setupEdges(Map<Object, Map<Object, Integer>> similaritiesMap, mxGraph graph, Object defaultParent) {
-        String edgeStyle = "strokeWidth=3;opacity=30";
-        List<String> gradient = Arrays.asList("#0E812E", "#386B28", "#625623", "#8C401E", "#B62B19", "#E11614");
+        String edgeStyle = "strokeWidth=5;opacity=20";
+        List<String> gradient = Arrays.asList("#0E812E", "#80BE25", "#E9F221", "#E6A81C", "#E35F18", "#E11614");
 
         for(Object vertex: similaritiesMap.keySet()) {
             for(Map.Entry<Object, Integer> edgeData: similaritiesMap.get(vertex).entrySet()) {
